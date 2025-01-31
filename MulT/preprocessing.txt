@@ -1,0 +1,41 @@
+Language: All videos have manual transcription.
+Glove word embeddings (Pennington et al.,
+2014) were used to extract word vectors from transcripts.
+Words and audio are aligned at phoneme
+level using P2FA forced alignment model (Yuan
+and Liberman, 2008). Following this, the visual
+and acoustic modalities are aligned to the words
+by interpolation. Since the utterance duration of
+words in English is usually short, this interpolation
+does not lead to substantial information loss.
+
+
+Visual: Frames are extracted from the full
+videos at 30Hz. The bounding box of the face
+is extracted using the MTCNN face detection algorithm
+(Zhang et al., 2016). We extract facial
+action units through Facial Action Coding System
+(FACS) (Ekman et al., 1980). Extracting these
+action units allows for accurate tracking and understanding
+of the facial expressions (Baltruˇsaitis
+et al., 2016). We also extract a set of six basic
+emotions purely from static faces using Emotient
+FACET (iMotions, 2017). MultiComp OpenFace
+(Baltruˇsaitis et al., 2016) is used to extract the set
+of 68 facial landmarks, 20 facial shape parameters,
+facial HoG features, head pose, head orientation
+and eye gaze (Baltruˇsaitis et al., 2016). Finally,
+we extract face embeddings from commonly used
+facial recognition models such as DeepFace (Taigman
+et al., 2014), FaceNet (Schroff et al., 2015)
+and SphereFace (Liu et al., 2017).
+
+Acoustic: We use the COVAREP software (Degottex
+et al., 2014) to extract acoustic features
+including 12 Mel-frequency cepstral coefficients,
+pitch, voiced/unvoiced segmenting features (Drugman
+and Alwan, 2011), glottal source parameters
+(Drugman et al., 2012; Alku et al., 1997, 2002),
+peak slope parameters and maxima dispersion quotients
+(Kane and Gobl, 2013). All extracted features
+are related to emotions and tone of speech.
