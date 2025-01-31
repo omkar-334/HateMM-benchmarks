@@ -1,8 +1,8 @@
+import gc
 from typing import Literal
 
 import torch
 import torch.nn as nn
-from dataset import clear_gpu_memory
 from transformers import BertModel, BertTokenizer
 
 EMBED_DIM_TEXT = 768
@@ -18,6 +18,12 @@ BATCH_SIZE = 32
 HIDDEN_DIM = 128  # Input dim for all modalities is 128
 CLASS_OUTPUT_DIM = 1  # Binary classification output
 NUM_HEADS = 4
+
+
+def clear_gpu_memory():
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        gc.collect()
 
 
 """The CMHFM contains four modules, i.e., Unimodal Feature Learning
