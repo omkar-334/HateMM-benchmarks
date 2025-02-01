@@ -1,0 +1,60 @@
+ The structure of the proposed model is illustrated in Fig. 1. The
+ input data were fed into the representation learning module, where
+ three unimodal tensors (𝑇𝑙, 𝑇𝑎, and 𝑇𝑣) containing features and tim
+ing information were obtained for each modality. These tensors were
+ then inputted into the MCMF, which was composed of UFF and LGT
+ modules. The UFF module fused the unimodal tensors of the three
+ modalities into a multimodal feature tensor (𝐹(𝑚)) using a three-fold
+ Cartesian product that learned the association between low-level fea
+tures. The LGT module enhanced the correlation between unimodal
+ representations using the linguistic tensor (𝑇𝑙) as query (Q) vectors to
+ compute the cross-modal multi-head attention score, which was then
+ used to calculate the weighted unimodal features (𝐹(𝑙), 𝐹(𝑎), and 𝐹(𝑣)).
+ The multimodal sentiment analysis task was divided into one multi
+modal task (Task m) and three unimodal tasks (Task l, Task a, and Task
+ v), which were jointly trained in the multitask learning framework.
+ The bottom-representation learning network was shared among differ
+ent tasks using a hard-sharing strategy. To generate unimodal labels,
+ the proposed SLGM module utilized multimodal labels to generate
+ unimodal labels. However, unimodal tasks were only used to assist
+ multimodal tasks, and the output of the multimodal task was taken as
+ the final prediction result
+
+
+
+1. Feature Extraction
+
+ text -  To solve this problem, we used a pretrained
+ BERT model [29] to extract the linguistic features. The BERT model
+ comprised 12 Transformers. Each layer contained a 768-dimensional
+ hidden layer and a multi-head attention (MHA) with 12 heads. The
+ model provided a better representation by capturing a bidirectional
+ context and finally generating 768-dimensional linguistic features.
+
+
+ Audio -  Acoustic Features: For acoustic features, we paid more attention
+ to the unique information of acoustic data such as intonation. In line
+ with Li et al. [30], frequency spectrum characteristics, such as mel
+frequency cepstral coefficients and constant-Q chromatograms, were
+ taken as acoustic features because of their proven relation to the
+ speaker’s sentiment.
+
+ Video -  Visual Features: For visual data, the facial expression is suffused
+ with sentiment information, and is, therefore, the most important. We
+ used the Openface 2.0 toolkit [31] to recognize facial information in the
+ visual data. The toolkit can extract a series of facial expression features
+ such as facial movement, head direction, and eye direction.
+
+ Time -  Timing Information: The BERT model can process timing infor
+mation; therefore, the extracted linguistic features include context in
+formation themselves. However, acoustic and visual features do not
+ contain timing information; therefore, they are passed to a bidirectional
+ LSTM (BiLSTM) network [32] to obtain context information. Finally,
+ 16-dimensional acoustic features and 32-dimensional visual features
+ were generated.
+
+2. UFF 
+we used a three-fold Cartesian product to fuse
+ multiple unimodal representations and capture bimodal and trimodal
+ interactions by multilevel fusion as follows:
+ {(𝑇𝑙,𝑇𝑎,𝑇𝜈)|𝑇𝑙 ∈ [𝑇𝑙 1 ],𝑇𝑎 ∈ [𝑇𝑎 1 ],𝑇𝑣 ∈ [𝑇𝑣 1 ]}
