@@ -1,0 +1,95 @@
+Hate speech classification has been an active area of research in recent years, driven by the growth of social platforms and the need to moderate harmful content. This section discusses past studies on hate speech detection based on unimodal (i.e., image, text, audio, and video) and multimodal data.
+
+Unimodal Hate Speech Detection
+
+For text-based detection, Bidirectional Encoder Representations for Transformers (BERT) (1.Devlin et al., 2018) have been applied in studies such as Cross-lingual Abusive language detection(2.Pamungkas & Patti, 2019) and HateBert (3.Caselli et al., 2021). Additionally, Generative Pretrained Transformers (GPT) (4.Radford et al., 2018) have been used for hate speech detection, as demonstrated in (5.Chiu et al.). Recently, LLaMa (6.Touvron et al., 2023) has been employed in the study (7.Kumarage et al.). However, these approaches face challenges like variation of meaning across contexts, translation issues in cross-lingual detection, misclassification due to keyword association and misinterpretation of counter-hate speech as hate speech.
+
+For image-based detection, Vision Transformer (ViT) (8. Dosovitskiy et al., 2020) and Video Vision Transformer (9.ViViT) (Arnab et al., 2021) have been explored for analyzing visual hate speech content. This approach primarily relies on visual features but can lack contextual or textual understanding, which is often required in understanding hate speech. 
+
+For audio-based detection, speech features like Mel-frequency cepstral coefficients (MFCCs), intensity, pitch, and duration have been examined in studies such as (10. Ibanez et al., 2007). Moreover, models like Wav2vec2 (11. Baevski et al., 2020) and WavBERT (12.Zheng et al., 2021) have been utilized in Arabic Speech Emotion Recognition (13. Mohamed et al.). Audio-based approaches focus on acoustic patterns, but thier effectiveness is limited due to the absence of linguistic or contextual information.
+
+For video-based detection, GPT-4 Vision (14. OpenAI, 2023) and Video LLaMa (15. Zhang et al.) have been investigated to improve hate speech classification through visual and contextual understanding in the studies (16.Lyu et al.) and Hate-Llama(17.Anisha et al.). However, these models struggle with cultural and linguistic complexities, particularly in interpreting regional dialects, idioms, and visual symbols that vary across different communities.
+
+Multimodal Hate Speech Detection
+
+Multimodal approaches with different types of fusion have been explored in the following studies - 
+(DeepCNN citation) introduces a cross corpus architecture with late fusion and an ensemble technique for combining the results, but assumes that the speaker's face is visible throughout the video and is designed for a single speaker.
+(CMHF citation) introduces multi-task learning and a cross-modal hierarchical fusion method, but faces challenges due to overfitting and excessive attention heads, which adds to the model complexity.
+(CSID citation) uses inter-modal and segment-level attention mechanisms by incorporating context-aware differences, but the approach is highly dependant on the training data (English / North American accents), making it less effective across divere linguistic backgrounds.
+
+Additionally, Transformer-based architectures have been widely adopted in multimodal studies. 
+For instance, the Multi-Level Correlation Mining Framework ( MCMF) (2023) utilizes multi-task learning and cross-modal transformer modules, while the Multimodal Transformer ( MulT) extends the standard Transformer network to learn representations directly from unaligned multimodal streams. These approaches struggle with handling inconsistencies in timing & alignment across different modalities, and also assume strong correlations among the modalities.
+
+
+Citations
+1 - https://arxiv.org/abs/1810.04805
+2 - https://aclanthology.org/P19-2051/
+3 - https://aclanthology.org/2021.woah-1.3.pdf
+4 - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf
+5 - https://arxiv.org/pdf/2103.12407
+6 - https://arxiv.org/abs/2302.13971
+7 - https://arxiv.org/abs/2403.08035v1
+8 - https://arxiv.org/abs/2010.11929
+9 - https://arxiv.org/abs/2103.15691
+10 - https://ieeexplore.ieee.org/document/9675250
+11 - https://arxiv.org/abs/2006.11477
+12 - https://arxiv.org/abs/2109.09161
+13 - https://arxiv.org/pdf/2110.04425
+14 - https://cdn.openai.com/papers/GPTV_System_Card.pdf
+15 - https://arxiv.org/abs/2306.02858
+16 - https://arxiv.org/abs/2311.07547
+17 - https://github.com/anishabhatnagar/Hate-LLaMA
+
+
+Limitations - Sources
+
+2. 6 Discussion. We discuss some of the challenges which contribute to make the cross-domain and cross-lingual abusive language detection tasks difficult. In particular, we will focus on some issues related to the presence of swear words in these kinds of texts. The different uses of swear words. As described in Section 3, the datasets we considered have different focuses w.r.t. the abusive phenomena captured, and this impacts on the lexical distribution in each dataset. Based on a further analysis, we observed that in datasets with a general topical focus such as OffensEval, the abusive tweets are marked by some common swear words such as “fuck”, “shit”, and “ass”. While in datasets featured by a specific hate target, such as the AMI dataset (misogyny), the lexical keywords in abusive tweets are dominated by specific sexist slurs such as “bitch”, “cunt”, and “whore”. This finding is consistent with the study of (ElSherief et al., 2018), which conducted an analysis on hate speech in social media based on its target. Furthermore, the pragmatics of swearing could also change from one dataset to another, depending on the topical features. Translation issues. As we expected, the use of automatic machine translation (via Google Translate) in our pipeline can give rise to errors in the cross-lingual setting. In particular, we observed errors in translations from English to other languages (Italian and Spanish) on some swear words, which are usually important clues to detect abusive content. See for instance the following cases from the EN-AMI Evalita dataset: Original tweet (EN): Punch that girl right in the skank. Translated tweet (IT): Pugno quella ragazza proprio nella Skank. Original tweet (EN): Apparently, you can turn a hoe into a housewife. Translated tweet (ES): Aparentemente, puedes convertir una azada en una ama de casa. Translating swearing is indeed challenging. In the first example, Google Translate is unable to provide an Italian translation for the English word “skank” (a proper translation could be “sciacquetta” or “sciattona”, which means “slut”). We found 134 occurrences of the word “skank” in EN-AMI Evalita and 185 in the EN-HatEval dataset. The second example shows, instead, a problem related to context and disambiguation issues. Indeed, the word “hoe” here is used informally in its derogatory sense, meaning “A woman who engages in sexual intercourse for money” (synonyms: slut, whore, floozy)8. But, disregarding the context, it is translated in Spanish by relying on a different conventional meaning (hoe as agricultural and horticultural hand tool). The term 8[https://www.urbandictionary.com/define.php?term=Hoe](https://www.google.com/url?sa=E&source=gmail&q=https://www.urbandictionary.com/define.php?term=Hoe) “hoe” is also very frequent in the EN-AMI Evalita (292 occurrences) and EN-HatEval dataset (348 occurrences).
+
+5. Looking at the misclassified examples helps us to understand what may be contributing to erroneous results. The following comment has a true label of ‘sexist’, but the model classifies it as ‘racist’ for some example sets in the mixed-category few-shot setting with instruction. This comment uses the word ‘Islam’ which may often be associated with discrimination based on race or ethnicity, but its core argument is about gender-based violence. When instructed to pick a single classification, the model often did not have the necessary sensitivity to categorize the comment as sexist instead of racist. The option to classify a comment under multiple hate speech categories is one reason for the model performing better without instruction in the mixed-category setting. ‘Islam! Lets beat their feminist ass’ Mixed-category few-shot classification (Example Set 5): racist, sexist (True label: sexist) Mixed-category few-shot classification, with instruction (Example Set 10): racist (True label: sexist) As another similar example, the following comment has a true label of ‘neither’, but the model classified it as ‘transphobic’ in the mixed-category few-shot setting (Example Sets 4 and 10, without instruction). ‘Transgenders have to protect each other, not fight each other’: transphobic (True label: neither.) The comment has a seemingly positive connotation towards the transgender community; the inclusion of ‘transgenders’ may be the reason for the false classification. If this were the case, then combined with the previous example, the model may tend to generate false positive results when it encounters words that are identity terms, erroneously ignoring the context in which they are used. Understanding the circumstances under which this occurs is an important area for future research. The following comment is an example of false negativity. This comment has a true label of ‘racist’ and was classified as ‘neither’ by the model when presented with Example Set 2. This is possibly because of the misspelling of the profane word ‘phuck’, where the implied word, which carries aggression, is obvious to a human reader. 17 ‘phuck white rasist ass people’: neither (True label: racist.) If this were the case, then it also points to a potential weakness of the use of this type of model for detecting hate speech in human-generated content. In particular, the way that humans use words changes quickly, especially sexist and racist language online. Large language models take a long time to train and deploy. It may be that, unless considerable context is provided in the prompt, the model will not identify words that have become sexist and racist through their usage in the time since the model was trained.
+
+7. We further investigated the specific types of spurious correlations influencing these LLMs using the functionality annotations of the HateCheck dataset. These annotations identify various categories of spurious correlations scenarios evident in non-hateful content, including “slur”, “profanity”, “negate hateful statements”, “group identifiers”, “countering of hate speech through quoting or referencing hate speech examples” and “abuse targeted at objects, individuals, and non-protected groups.” As illustrated in Figure 2, Llama 2 exhibits more errors attributed to spurious correlations, further underlining its diminished performance in classifying the ’non-hate’ category. Both Llama 2 and GPT 3.5 display heightened inaccuracies in distinguishing examples that counteract hate speech by referencing or quoting hate speech instances. This augmented error rate may be, in part, due to the labeling function, where specific counter-speech scenarios could trigger the LLM guardrails. As a result, the labeling function might mistakenly assume that the LLM’s response to these examples implies a hate label. This underscores the significance of adequately addressing such scenarios when integrating LLMs into real-world hate speech detection frameworks.
+
+16.  However, our findings also highlight certain limitations:
+ • Challenges with Fresh Content: The model shows deficiencies in effectively analyzing
+ fresh, unprecedented content, which underscores the need for continual learning and adapta
+tion. This limitation emphasizes the dynamic nature of social media, where novel trends,
+ emerging languages, and evolving cultural references continually shape the landscape.
+ • Navigating Language and Cultural Complexities: GPT-4V encounters difficulties in fully
+ addressing the intricate layers of language variation and cultural diversity in multimodal
+ social media analysis. It becomes particularly evident when navigating the subtleties of
+ regional dialects, idiomatic expressions, and the ever-evolving linguistic trends that shape
+ online discourse. Moreover, the rich tapestry of cultures represented in social media presents
+ a mosaic of references, symbols, and contextual cues that require a profound understanding
+ for accurate analysis
+
+CSID - However, our model has its limitations. Firstly, it may not perform
+efficiently in real-time computing scenarios, posing a challenge
+for applications requiring immediate analysis. Secondly, our current
+approach treats sarcasm as binary data, which might not fully capture
+its complex nature. Finally, the model’s dependency on large quantities
+of training data could limit its adaptability and scalability.
+
+
+CMHFM - The underlying reason could be summarized as two factors. First, since there are 2281 video
+clips in the CH-SIMS, it is easy to cause model overfitting when setting bs = 128. Second, too many heads may introduce redundant
+information, which further causes suboptimal performance.
+
+DeepCNN - 6. Threats to validity
+• The image emotion recognition model is created with the assumption
+that the speaker’s face is visible at all times during the
+video. The face detector is included in the architecture to discard
+frames where faces are not detected, but it has not been tested
+particularly for scenarios of the presence of multiple faces.
+• The audio emotion recognition model has been developed for the
+scenario of a single speaker with a North American accent. Twoway
+conversations and videos with other noises like music have
+not been included in the test dataset.
+• The textual emotion recognition model is unilingual, trained, and
+tested only for the English language. Also, the transcript needs to
+be available with the video for the text model to work.
+
+MCMF -Among the existing multimodal data, linguistic modalities provide
+the richest sentiment information.  However, the use of hard-sharing mechanism in multi-task learning
+requires a strong correlation between the different subtasks. Noise in
+the automatically generated unimodal labels affects the effectiveness of
+correlation mining between unimodal and multimodal tasks
